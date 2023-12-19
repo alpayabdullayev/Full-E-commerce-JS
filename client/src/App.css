@@ -1,0 +1,4 @@
+.categoryCard:hover  {
+    fill: white !important; /* Change the fill color to white on hover */
+    transition: fill 0.3s ease-in-out !important; /* Add a transition for a smooth effect */
+}

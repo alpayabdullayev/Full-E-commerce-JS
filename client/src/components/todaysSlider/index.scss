@@ -1,0 +1,30 @@
+.card{
+    &:hover {
+        .addToCart{
+            opacity: 1 ;
+            visibility: visible ;
+            transform: translateY(0px);
+            transition: all 0.3s ease;  
+            
+        }
+        .rightBtns{
+            opacity: 1 ;
+            visibility: visible ;
+            transform: translateX(0px);
+            transition: all 0.3s ease;  
+        }
+    }
+    .addToCart{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+    .rightBtns{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(10px);
+        transition: all 0.3s ease;
+    }
+
+}

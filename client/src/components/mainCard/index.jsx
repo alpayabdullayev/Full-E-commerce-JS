@@ -6,11 +6,11 @@ import { GoEye } from "react-icons/go";
 
 const MainCard = ({img,discount,name,discountPirce,originalPrice}) => {
   return (
-    <div className="card rounded-md"> 
+    <div className="group card rounded-md"> 
       <div className="cardImg bg-imgBg p-[50px] relative rounded-md">
         <div className="flex justify-center items-center"><img  src={img} alt=""/>
             </div>
-        <div className="discount absolute top-[12px] left-[12px] bg-secondary text-white py-[4px] px-[12px]  text-sm rounded-sm">
+        <div className="group-hover:bg-indigo-700 discount absolute top-[12px] left-[12px] bg-secondary text-white py-[4px] px-[12px]  text-sm rounded-sm">
           {discount}
         </div>
         <div className="addToCart absolute bottom-0 bg-black w-full left-0 text-white text-center py-[8px] z-10">

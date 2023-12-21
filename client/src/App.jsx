@@ -5,7 +5,8 @@ import Home from './pages/home'
 import Contact from './pages/contact'
 import Shop from './pages/shop'
 import "./assets/scss/main.scss"
-import SignIn from './pages/SignIn'
+import LogIn from './pages/logIn'
+
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
             <Route path={"/contact"} element={<Contact/>}/>
             <Route path={"/shop"} element={<Shop/>}/>
             <Route path={"/shop"} element={<Shop/>}/>
-            <Route path={'/signin'} element={<SignIn/>}/>
+            <Route path={'/signin'} element={<LogIn/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

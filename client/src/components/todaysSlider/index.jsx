@@ -47,7 +47,7 @@ const TodaySlider = () => {
                     className="mySwiper"
                 >
                     <SwiperSlide>
-                        <div className="card">
+                        <div className="group card">
                             <div className="cardImg bg-imgBg p-[50px] relative">
                                 <img src={PsImg} alt="" />
                                 <div className="discount absolute top-[12px] left-[12px] bg-secondary text-white py-[4px] px-[12px]  text-sm rounded-sm">
@@ -56,8 +56,8 @@ const TodaySlider = () => {
                                 <div className="addToCart absolute bottom-0 bg-black w-full left-0 text-white text-center py-[8px] z-10">
                                     <button>Add To Cart</button>
                                 </div>
-                                <div className="rightBtns absolute top-[12px] right-[12px] flex flex-col gap-2">
-                                    <button className="btn-groups">
+                                <div className="rightBtns  absolute top-[12px] right-[12px] flex flex-col gap-2">
+                                    <button className=" btn-groups">
                                         <FaRegHeart />
                                     </button>
                                     <button className="btn-groups"><GoEye /></button>

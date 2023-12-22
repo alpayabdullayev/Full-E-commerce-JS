@@ -6,6 +6,9 @@ import Contact from './pages/contact'
 import Shop from './pages/shop'
 import "./assets/scss/main.scss"
 import LogIn from './pages/logIn'
+import SignUp from './pages/signup'
+import UserPage from './pages/userPage'
+import PrivateRoute from './routes/PrivateRoute'
 
 
 function App() {
@@ -19,7 +22,12 @@ function App() {
             <Route path={"/contact"} element={<Contact/>}/>
             <Route path={"/shop"} element={<Shop/>}/>
             <Route path={"/shop"} element={<Shop/>}/>
-            <Route path={'/signin'} element={<LogIn/>}/>
+            <Route path={'/login'} element={<LogIn/>}/>
+            <Route path={'/signup'} element={<SignUp/>}/> 
+            <Route element={<PrivateRoute/>}>
+              <Route path={'/user'} element={<UserPage/>}/>
+            </Route>
+            
           </Route>
         </Routes>
       </BrowserRouter>

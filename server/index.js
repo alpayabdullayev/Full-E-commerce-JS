@@ -1,9 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import cors from "cors";
+import mongoose from "mongoose";
 import router from "./routes/auth.js";
-
 
 const app = express();
 dotenv.config();
@@ -21,10 +20,10 @@ mongoose
   .then(() => console.log("Connected to the database"))
   .catch((err) => console.error("DB connection error:", err));
 
-  app.use("/api",router);
+app.use("/api",router);
 
 app.get("/", (req, res) => {
-  res.send("<h1>Hello World!</h1>");
+  res.send("Hello World!");
 });
 
 app.listen(PORT, () => {

@@ -7,6 +7,9 @@ import BuyNow from '../../components/buyNow'
 import OurProducts from '../../components/ourProducts'
 import Featured from '../../components/featured'
 import DeliveryAndService from '../../components/deliveryAndService'
+import Table from '../../components/Table'
+import TableBasket from '../../components/Table'
+import BunuSil from '../../bunusil'
 
 const Home = () => {
   return (
@@ -19,6 +22,8 @@ const Home = () => {
     <OurProducts/>
     <Featured/>
     <DeliveryAndService/>
+    <BunuSil/>
+    <TableBasket/>
     </>
   )
 }

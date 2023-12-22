@@ -3,8 +3,15 @@ import { FaStar } from "react-icons/fa";
 
 import { FaRegHeart } from "react-icons/fa";
 import { GoEye } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
+import { addBasket, deleteBasket } from "../../features/basketSlice";
 
-const MainCard = ({img,discount,name,discountPirce,originalPrice}) => {
+const MainCard = ({img,discount,name,price,originalPrice,handleBasket,item,id}) => {
+  const basket = useSelector((state) => state.basketS.value);
+
+
+
+ 
   return (
     <div className="group card rounded-md"> 
       <div className="cardImg bg-imgBg p-[50px] relative rounded-md">
@@ -14,7 +21,9 @@ const MainCard = ({img,discount,name,discountPirce,originalPrice}) => {
           {discount}
         </div>
         <div className="addToCart absolute bottom-0 bg-black w-full left-0 text-white text-center py-[8px] z-10">
-          <button >Add To Cart</button>
+        <button onClick={() => handleBasket({ id, img, name, price, originalPrice })}>
+          Add To Cart
+        </button>
         </div>
         <div className="rightBtns absolute top-[12px] right-[12px] flex flex-col gap-2">
           <button className="btn-groups">
@@ -28,7 +37,7 @@ const MainCard = ({img,discount,name,discountPirce,originalPrice}) => {
       <div className="cardBody pt-4">
         <p className="font-bold">{name}</p>
         <p>
-          <span className="text-secondary">${discountPirce}</span>
+          <span className="text-secondary">${price}</span>
           <span className="text-yellow-500">
             <del>${originalPrice}</del>
           </span>
@@ -39,7 +48,7 @@ const MainCard = ({img,discount,name,discountPirce,originalPrice}) => {
             <FaStar />
             <FaStar />
             <FaStar />
-            <FaStar />
+            <FaStar />  
           </span>
         </p>
       </div>

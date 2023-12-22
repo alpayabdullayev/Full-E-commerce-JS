@@ -6,11 +6,9 @@ import LoginInForm from "../loginForm";
 const LogInSection = () => {
   return (
     <section id="sign-in" className=" pt-16 pb-36">
-      <div className="sign-in-content">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
-          <LoginRegisterImg />
-          <LoginInForm/>
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
+        <LoginRegisterImg />
+        <LoginInForm />
       </div>
     </section>
   );

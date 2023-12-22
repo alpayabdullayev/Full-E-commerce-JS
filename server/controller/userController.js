@@ -1,59 +1,80 @@
-import jwt from "jsonwebtoken";
-import User from "../model/usersSchema.js";
+import User from "../model/userSchema.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log(email, password);
-    const userExists = await User.findOne({ email });
-
-    if (userExists) {
-      return res.status(409).send("Email already exists");
+    try {
+      const { username, password, email,role } = req.body;
+  
+      const userExist = await User.findOne({ username });
+  
+      if (userExist) {
+        return res.status(400).json({ error: "Username already exists" });
+      }
+  
+      const rounds = 12;
+      const hashedPassword = await bcrypt.hash(password, rounds);
+  
+      const newUser = new User({
+        username,
+        password: hashedPassword,
+        role,
+        email
+      });
+  
+      await newUser.save();
+      res.status(201).json({ message: "User created successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    const rounds = 12;
-    const hashedPassword = await bcrypt.hash(password, rounds);
-
-    const newUser = new User({
-      email,
-      password: hashedPassword,
-    });
-
-    await newUser.save();
-    res.status(201).send("User Created");
+  };
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedUser = await User.findByIdAndDelete(id);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 export const login = async (req, res) => {
-  try {
-
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    console.log(user);
-    if (!user || !( bcrypt.compare(password, user.password))) {
-      return res.status(401).send("Wrong user");
-    }
-    const token = jwt.sign(
-      {
-        userId: user._id,
-      },
-      "secretKey",
-      { expiresIn: "60s" }
-    );
-    res.send(token);
-  } catch (error) {
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-
-export const getAllUser = async (req,res)=>{
     try {
-        res.send("welcomeUser")
+      const { username, password, role,email } = req.body;
+      const user = await User.findOne({ username });
+  
+      if (!user) {
+        return res.status(401).json({ error: "User not found" });
+      }
+  
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      console.log(user.password);
+      console.log(password);
+      if (!passwordMatch) {
+        return res.status(401).json({ error: "Incorrect password" });
+      }
+  
+      const token = jwt.sign({ userId: user._id, role: role,email:email }, "secretKey", {
+        expiresIn: "1h",
+      });
+  
+      res.status(200).json({ token });
     } catch (error) {
-        console.log(error);
+      console.error(error);
+      res.status(500).json({ error: "Login failed" });
     }
-} 
+  };

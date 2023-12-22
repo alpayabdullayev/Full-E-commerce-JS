@@ -8,11 +8,11 @@ const UserSchema = new Schema({
     role : { type: String }
 });
 
-UserSchema.pre("save", async function (next) {
-    const rounds = 12;
-    const hashPassword =  bcrypt.hash(this.password, rounds);
-    this.password = hashPassword;
-    next();
-});
+// UserSchema.pre("save", async function (next) {
+//     const rounds = 12;
+//     const hashPassword = await bcrypt.hash(this.password, rounds);
+//     this.password = hashPassword;
+//     next();
+// });
 
 export default mongoose.model("users", UserSchema);

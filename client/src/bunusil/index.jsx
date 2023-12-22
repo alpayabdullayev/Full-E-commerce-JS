@@ -31,9 +31,12 @@ const BunuSil = () => {
 
 
   return (
-    <div>
+    <div className='wrapper'>
       {data.map((item) => (
-        <MainCard key={item.id} {...item} id={item.id} handleBasket={handleBasket} />
+        <div>
+            <MainCard key={item.id} {...item} id={item.id} price={item.price} {...item} handleBasket={handleBasket} />
+        </div>
+        
       ))}
     </div>
   );

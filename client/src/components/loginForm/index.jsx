@@ -18,13 +18,26 @@ const LoginInForm = () => {
         password: password,
       });
 
-      console.log("daxil oldu", response.data);
+      console.log("daxil oldu", response.data.token);
+      localStorage.setItem("t",response.data.token)
       setUser({username,password})
       navigate("/")
     } catch (error) {
       console.error(error);
     }
   };
+
+  const deleteUser = async (id) =>{
+    const authToken = localStorage.getItem('t') ? JSON.parse(localStorage.getItem('t')) : null;
+    try {
+      const response = await axios.delete(`http://localhost:8300/api/register/${id}`, {
+        headers: `Bearer ${authToken}`
+      },); console.log('User deleted successfully', response.data);
+
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div className="flex flex-col justify-center px-12 xl:px-40 lg:px-20 md:px-24 py-10 md:py-0 ">

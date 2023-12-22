@@ -1,26 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table, Image, InputNumber } from "antd";
 import { FaTimesCircle } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteBasket } from '../../features/basketSlice.jsx';
+import { deleteBasket, addBasket,basketIncrement } from '../../features/basketSlice.jsx';
 
 const TableBasket = () => {
   const basket = useSelector((state) => state.basketS.value);
   const dispatch = useDispatch();
 
-  function handleQuantityChange(id, value) {
-    console.log("Quantity changed for item with id", id, "to", value);
-  }
+  useEffect(() => {
+    localStorage.setItem("basket", JSON.stringify(basket));
+  }, [basket])
+  
 
-  function handleCountChange(id, value) {
-    dispatch(handleQuantityChange(id, value));
-  }
+  const handleQuantityChange = (id, value) => {
+    dispatch(addBasket({ id, count: value.target.value }));
+  };
 
-  function handleClick(record) {
+  const handleClick = (record) => {
     dispatch(deleteBasket(record.id));
+  };
+  const artir = (item)=>{
+    dispatch(basketIncrement(item))
   }
 
-  const columnsData = columns({ handleCountChange, handleClick }); // Pass handleCountChange as a prop
+  const columnsData = columns({ handleQuantityChange, handleClick,artir });
 
   return (
     <section>
@@ -39,15 +43,16 @@ const TableBasket = () => {
     </section>
   );
 };
+export default TableBasket
 
-export const columns = ({ handleCountChange, handleClick }) => [
+export const columns = ({ handleQuantityChange, handleClick,artir }) => [
   {
     title: "Product",
     dataIndex: "product",
     render: (text, record) => (
       <div className="flex items-center relative">
         <span
-          onClick={() => handleClick(record)} 
+          onClick={() => handleClick(record)}
           className="text-secondary text-lg absolute top-0 left-0 z-50 bg-white rounded-full"
         >
           <FaTimesCircle />
@@ -64,22 +69,13 @@ export const columns = ({ handleCountChange, handleClick }) => [
   {
     title: "Quantity",
     dataIndex: "count",
-    render: (text, record) => (
+    render: (text, item) => (
       <div className="flex items-center">
-        <button onClick={() => handleCountChange(record.id, text - 1)} disabled={text <= 1}>
-          -
-        </button>
-        <InputNumber
-          min={1}
-          max={100}
-          value={text}
-          onChange={(value) => handleCountChange(record.id, value)}
-          size="large"
-          style={{ textAlign: "center", margin: "0 8px" }}
-        />
-        <button onClick={() => handleCountChange(record.id, text + 1)}>
-          +
-        </button>
+        <p>{text}</p> 
+        <div className="flex flex-col items-center justify-center">
+        <button onClick={()=>artir(item)}>+</button>
+        <button>-</button>
+        </div>
       </div>
     ),
   },
@@ -89,5 +85,3 @@ export const columns = ({ handleCountChange, handleClick }) => [
     render: (text, record) => record.count * record.price, 
   },
 ];
-
-export default TableBasket;

@@ -12,6 +12,9 @@ export default {
         "text" : "#FAFAFA",
         "success" : "#0F6"
       },
+      fontSize: {
+        clamp: "clamp(1rem, 5vw, 3rem)",
+      },
 
     },
   },

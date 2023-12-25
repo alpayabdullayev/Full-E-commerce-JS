@@ -4,7 +4,7 @@ const Button = ({ text, bgPrimary,wFull }) => {
   const bgColorClass = bgPrimary ? "bg-secondary hover:bg-success" : "bg-success hover:bg-secondary"
   
   return (
-    <div className='projectBtn'>
+    <div className={`projectBtn ${wFull}`}>
       <button
         className={`py-[16px] px-[48px] rounded-md text-center text-white ${bgColorClass} ${wFull}  duration-500`}
       >

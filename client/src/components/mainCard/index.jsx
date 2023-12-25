@@ -1,37 +1,37 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaTrash } from "react-icons/fa";
 
 import { FaRegHeart } from "react-icons/fa";
 import { GoEye } from "react-icons/go";
-import { useDispatch, useSelector } from "react-redux";
-import { addBasket, deleteBasket } from "../../features/basketSlice";
 
-const MainCard = ({img,discount,name,price,originalPrice,handleBasket,item,id}) => {
-  const basket = useSelector((state) => state.basketS.value);
-
-
-
- 
+const MainCard = ({ img, discount, name, price, originalPrice, wishlist }) => {
   return (
-    <div className="group card rounded-md"> 
+    <div className="group card rounded-md">
       <div className="cardImg bg-imgBg p-[50px] relative rounded-md">
-        <div className="flex justify-center items-center"><img  src={img} alt=""/>
-            </div>
+        <div className="flex justify-center items-center">
+          <img src={img} alt="" />
+        </div>
         <div className="group-hover:bg-indigo-700 discount absolute top-[12px] left-[12px] bg-secondary text-white py-[4px] px-[12px]  text-sm rounded-sm">
           {discount}
         </div>
         <div className="addToCart absolute bottom-0 bg-black w-full left-0 text-white text-center py-[8px] z-10">
-        <button onClick={() => handleBasket({ id, img, name, price, originalPrice })}>
-          Add To Cart
-        </button>
+          <button>Add To Cart</button>
         </div>
         <div className="rightBtns absolute top-[12px] right-[12px] flex flex-col gap-2">
-          <button className="btn-groups">
-            <FaRegHeart />
-          </button>
-          <button className="btn-groups">
-            <GoEye />
-          </button>
+          {wishlist ? (
+            <button className="btn-groups">
+              <FaTrash />
+            </button>
+          ) : (
+            <>
+              <button className="btn-groups">
+                <FaRegHeart />
+              </button>
+              <button className="btn-groups">
+                <GoEye />
+              </button>
+            </>
+          )}
         </div>
       </div>
       <div className="cardBody pt-4">
@@ -48,7 +48,7 @@ const MainCard = ({img,discount,name,price,originalPrice,handleBasket,item,id}) 
             <FaStar />
             <FaStar />
             <FaStar />
-            <FaStar />  
+            <FaStar />
           </span>
         </p>
       </div>

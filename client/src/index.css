@@ -21,3 +21,8 @@
 .date-groups{
  @apply w-[62px] h-[62px] rounded-[50%] bg-white flex flex-col justify-center items-center
 }
+
+
+.flex-center{
+  @apply flex flex-col justify-center items-center
+}

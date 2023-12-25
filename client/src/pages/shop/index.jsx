@@ -1,8 +1,14 @@
 import React from 'react'
+import TableBasket from '../../components/Table'
+import BasketTotal from '../../components/basketTotal'
+
 
 const Shop = () => {
   return (
-    <div>Shop</div>
+    <>
+    <TableBasket/>
+    <BasketTotal/>
+    </>
   )
 }
 

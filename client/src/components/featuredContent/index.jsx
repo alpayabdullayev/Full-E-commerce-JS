@@ -10,9 +10,9 @@ const FeaturedContent = () => {
     <>
       <div className="py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="w-full bg-black pt-[89px] px-[30px] rounded-md relative">
-            <div>
-              <img src={PS5} alt="" />
+          <div className="w-full bg-black  group  pt-[89px] px-[30px] rounded-md relative overflow-hidden ">
+            <div className="group-hover:scale-110 duration-700">
+              <img src={PS5} alt="" className="object-cover"/>
               <div className="absolute bottom-[10px] text-white">
                 <p className="text-xl">PlayStation 5</p>
                 <p className="my-2">Black and White version of the PS5 <br /> coming out on sale.</p>

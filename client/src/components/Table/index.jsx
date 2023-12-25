@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { Table, Image, InputNumber } from "antd";
+import { Table, Image } from "antd";
 import { FaTimesCircle } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteBasket, addBasket,basketIncrement } from '../../features/basketSlice.jsx';
+import { deleteBasket, addBasket,basketIncrement,  } from '../../features/basketSlice.jsx';
+import Button2 from "../button2/index.jsx";
 
 const TableBasket = () => {
   const basket = useSelector((state) => state.basketS.value);
@@ -23,29 +24,37 @@ const TableBasket = () => {
   const artir = (item)=>{
     dispatch(basketIncrement(item))
   }
+  // const azalt = (item) => {
+  //   dispatch(basketDecrement(item))
+  // }
 
   const columnsData = columns({ handleQuantityChange, handleClick,artir });
 
   return (
-    <section>
-      <div className="wrapper">
+    <section className="py-20">
+      <div className="wrapper ">
         <Table
           columns={columnsData}
           dataSource={basket.map((item) => ({ ...item, key: item.id }))}
           pagination={{
-            pageSize: 50,
+            pageSize: 3,
           }}
           scroll={{
-            y: 240,
+            y: 200,
           }}
         />
+        <div className="flex justify-between items-center py-10">
+        <div><Button2 text={"Return To Shop"}/></div>
+        <div><Button2 text={"Update Cart"}/></div>
       </div>
+      </div>
+      
     </section>
   );
 };
 export default TableBasket
 
-export const columns = ({ handleQuantityChange, handleClick,artir }) => [
+export const columns = ({  handleClick,artir, }) => [
   {
     title: "Product",
     dataIndex: "product",
@@ -70,11 +79,13 @@ export const columns = ({ handleQuantityChange, handleClick,artir }) => [
     title: "Quantity",
     dataIndex: "count",
     render: (text, item) => (
-      <div className="flex items-center">
-        <p>{text}</p> 
-        <div className="flex flex-col items-center justify-center">
+      <div className="flex items-center  px-2">
+        <div className="border border-solid rounded-md flex pl-1 items-center p-1">
+        <p className="text-md">{text}</p> 
+        <div className="flex flex-col pl-6">
         <button onClick={()=>artir(item)}>+</button>
-        <button>-</button>
+        {/* <button onClick={()=>azalt(item)}>-</button> */}
+        </div>
         </div>
       </div>
     ),
@@ -82,6 +93,6 @@ export const columns = ({ handleQuantityChange, handleClick,artir }) => [
   {
     title: "Subtotal",
     dataIndex: "subtotal",
-    render: (text, record) => record.count * record.price, 
+    render: (text, record) =>`$ ${record.count * record.price}`
   },
 ];
